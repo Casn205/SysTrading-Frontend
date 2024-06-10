@@ -18,6 +18,15 @@ const NavBar = () => {
           </ul>
         </li>
 
+        <li className="registro-dropdown">
+          <Link to="#">Ver</Link>
+          <ul className="dropdown-content">
+            <li><Link to="/VerUsuarios">Usuarios</Link></li>
+            <li><Link to="/VerProductos">Productos</Link></li>
+            <li><Link to="/VerProveedor">Proveedor</Link></li>
+          </ul>
+        </li>
+
         <li><Link to="/Pedido">Pedido</Link></li>
         <li><Link to="/Egreso">Egreso</Link></li>
 

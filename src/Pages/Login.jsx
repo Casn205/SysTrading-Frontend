@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../Style/Login.css";
 
@@ -9,6 +10,7 @@ const Login = () => {
   const [correo, setCorreo] = useState("");
   const [contrasena, setContraseña] = useState("");
 
+
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
@@ -16,6 +18,7 @@ const Login = () => {
         "Correo": correo,
         "Contraseña": contrasena,
       });
+
       const { token, mensaje } = response.data;
       if (token) {
         localStorage.setItem("token", token);
@@ -23,6 +26,7 @@ const Login = () => {
       } else {
         alert(mensaje);
       }
+
     } catch (error) {
       console.error("Error during login:", error);
       alert("An error occurred during login.");

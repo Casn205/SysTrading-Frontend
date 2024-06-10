@@ -1,0 +1,56 @@
+/* RegistroProveedor.css */
+  
+.registro-proveedor-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+  }
+  
+  .registro-proveedor-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .registro-proveedor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  h1 {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-control {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .form-control:focus {
+    border-color: #34b3f1;
+    box-shadow: none;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(45deg, #34b3f1, #6a11cb);
+    border: none;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .btn-primary:hover {
+    background: linear-gradient(45deg, #2a92da, #5a0db7);
+  }
+  

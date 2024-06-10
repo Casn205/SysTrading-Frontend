@@ -4,37 +4,78 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../Style/RegistroUsuarios.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import verificarToken from '../Components/VerificarToken';
+import Swal from 'sweetalert2';
+
+const Validar = () => {
+
+  if (verificarToken()) {
+    return <RegistroUsuario/>; 
+  } else {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "No estas autorizado para ingresar a este recurso"
+    });
+    return <NavBar />;
+  }
+};
 
 const RegistroUsuario = () => {
+  //Declarar los datos a utilizar
   const [Nombre, setNombre] = useState("");
   const [Apellido, setApellido] = useState("");
   const [Correo, setCorreo] = useState("");
   const [Cedula, setCedula] = useState("");
   const [FechaNac, setFechaNac] = useState("");
   const [Contraseña, setContraseña] = useState("");
-
   const [Rol, setRol] = useState([]);
-  const [rolseleccion, setSeleccion] = useState("");
+  const [rolSeleccion, setSeleccion] = useState("");
+  const [User, setUser] = useState([]);
+  const URL = "http://localhost:8080/usuario";
 
+  //Obtengo la lista del desplegable
+  useEffect(() => {
+    getRol();
+  }, []);
+
+  const getRol = async () => {
+    try {
+      const res = await axios.get("http://localhost:8080/Rol/Obtener");
+      setRol(res.data);
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al obtener los roles."
+      });
+    }
+  };
+
+  //Obtener datos para la tabla
   useEffect(() => {
     getUser();
   }, []);
 
   const getUser = async () => {
     try {
-      const res = await axios.get("http://localhost:8080/Rol/Obtener");
-      setRol(res.data);
+      const res = await axios.get(URL + "/Obtener");
+      setUser(res.data);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un problema al obtener los usuarios."
+      });
     }
   };
 
+  //Ocasionar el evento para enviar los datos
   const handleLogin = async (event) => {
     event.preventDefault();
     try {
-
       const response = await axios.post(
-        "http://localhost:8080/usuario/registrar/" +rolseleccion,
+        "http://localhost:8080/usuario/registrar/" + rolSeleccion,
         {
           Nombre: Nombre,
           Apellido: Apellido,
@@ -52,24 +93,39 @@ const RegistroUsuario = () => {
       setContraseña("");
 
       if (response.status === 200) {
-        alert("Usuario creado correctamente");
+        Swal.fire({
+          icon: "success",
+          title: "Usuario creado",
+          text: "El usuario ha sido creado correctamente.",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        getUser(); // Actualiza la lista de usuarios
       } else {
-        alert("El usuario ingresado no es valido");
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "El usuario ingresado no es válido."
+        });
       }
-
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An error occurred during login.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Ocurrió un error al crear el usuario. Por favor, intenta de nuevo."
+      });
     }
   };
 
+  //Mostrar los datos en pantalla
   return (
     <>
       <NavBar />
       <div className="registro-container d-flex justify-content-center align-items-center">
         <div className="registro-card shadow-lg rounded p-4">
           <h1 className="text-center mb-4">Registro de Usuario</h1>
-          <form>
+          <form onSubmit={handleLogin}>
             <div className="row">
               <div className="col-md-6">
                 <div className="form-group">
@@ -166,10 +222,10 @@ const RegistroUsuario = () => {
                   <select
                     className="form-control"
                     id="rol"
-                    value={rolseleccion}
+                    value={rolSeleccion}
                     onChange={(e) => setSeleccion(e.target.value)}
-                    required
-                  >
+                    required>
+                    <option>Seleccione un rol</option>
                     {Rol.map((rol) => (
                       <option key={rol.idRol} value={rol.idRol}>
                         {rol.Nombre}
@@ -180,7 +236,6 @@ const RegistroUsuario = () => {
               </div>
             </div>
             <button
-              onClick={handleLogin}
               type="submit"
               className="btn btn-primary w-100 mt-4"
             >
@@ -189,8 +244,34 @@ const RegistroUsuario = () => {
           </form>
         </div>
       </div>
+
+      {/*******************TABLA***********************/}
+
+      <div className="container-md mt-5">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">NOMBRE</th>
+              <th scope="col">CORREO</th>
+              <th scope="col">CEDULA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {User.map((user) => (
+              <tr key={user.idUsuario}>
+                <th scope="row">{user.idUsuario}</th>
+                <td>{user.Nombre}</td>
+                <td>{user.Correo}</td>
+                <td>{user.Cedula}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   );
 };
 
-export default RegistroUsuario;
+export default Validar;
+
