@@ -7,9 +7,15 @@ import RegistroProductos from "./Pages/RegistroProductos";
 import VerUsuarios from "./Pages/VerUsuarios";
 import VerProveedor from "./Pages/VerProveedor";
 import VerProductos from "./Pages/VerProductos";
-import EquipoDetalles from "./Pages/EquipoDetalles"
 import Pedido from "./Pages/Pedido"
 import Egreso from "./Pages/Egreso"
+import EditUsuario from "./Components/EditarUsuario"
+import VerPedido from "./Pages/VerPedidos";
+import VerEgreso from "./Pages/VerEgreso";
+import RegistroPedido from "./Pages/RegistroPedido";
+import RegistroEgreso from "./Pages/RegistroEgreso";
+import ActualizarProducto from "./Pages/ActualizarProducto"
+import EditarProveedor from "./Components/EditarProveedores"
 
 function App() {
   return (
@@ -24,7 +30,13 @@ function App() {
         <Route path="/VerUsuarios" element={<VerUsuarios/>} />
         <Route path="/VerProductos" element={<VerProductos/>} />
         <Route path="/VerProveedor" element={<VerProveedor/>} />  
-        <Route path="/EquipoDetalles/:EquipoId" element={<EquipoDetalles />} />
+        <Route path="/EditarUsuario/:UserId" element={<EditUsuario />} />
+        <Route path="/VerPedido" element={<VerPedido/>}/>
+        <Route path="/VerEgreso" element={<VerEgreso/>}/>
+        <Route path="/RegistroPedido" element={<RegistroPedido />} />
+        <Route path="/RegistroEgreso" element={<RegistroEgreso/>} />
+        <Route path="/ActualizarProducto/:Idproduct" element={<ActualizarProducto />} />
+        <Route path="/EditarProveedor/:IdProveedor" element={<EditarProveedor />} />
         <Route path="*" element={<noEncontrado/>}/>
       </Routes>
   );

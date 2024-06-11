@@ -15,6 +15,8 @@ const NavBar = () => {
             <li><Link to="/RegistroUsuario">Usuarios</Link></li>
             <li><Link to="/RegistroProducto">Productos</Link></li>
             <li><Link to="/RegistroProveedor">Proveedor</Link></li>
+            <li><Link to="/RegistroPedido">Pedido</Link></li>
+            <li><Link to="/RegistroEgreso">Egreso</Link></li>
           </ul>
         </li>
 
@@ -24,11 +26,10 @@ const NavBar = () => {
             <li><Link to="/VerUsuarios">Usuarios</Link></li>
             <li><Link to="/VerProductos">Productos</Link></li>
             <li><Link to="/VerProveedor">Proveedor</Link></li>
+            <li><Link to="/VerPedido">Pedido</Link></li>
+            <li><Link to="/VerEgreso">Egreso</Link></li>
           </ul>
         </li>
-
-        <li><Link to="/Pedido">Pedido</Link></li>
-        <li><Link to="/Egreso">Egreso</Link></li>
 
         <li className="cerrar-sesion">
           <Link to="/">Cerrar sesion</Link>
