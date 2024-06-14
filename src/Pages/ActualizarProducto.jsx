@@ -11,7 +11,7 @@ const VerProductos = () => {
     const [unit_price, setunit_price] = useState("");
     const [cantidad, setcantidad] = useState("");
     const [image, setimage] = useState("");
-
+     
     const handleLogin = async (event) => {
       event.preventDefault();
       try {

@@ -1,54 +1,42 @@
-import NavBar from "../Components/NavBar";
+import Banner from './Banner';
+import '../Style/Principal.css';
+import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import { useState, useEffect } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import NavBar from "../Components/NavBar";
 
-const URL = "http://localhost:8080/usuario";
-
-const Principal = () => {
-  const [User, setUser] = useState([]);
-
+function App() {
+  const [products, setProducts] = useState([]);
+  
   useEffect(() => {
-    getUser();
+    getProducts();
   }, []);
-  const getUser = async () => {
+
+  const getProducts = async () => {
     try {
-      const res = await axios.get(URL+"/Obtener");
-      setUser(res.data);
+      const res = await axios.get("http://localhost:8080/Products/Obtener");
+      setProducts(res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
+  const images = products.map(product => product.image);
+
   return (
     <>
-      <NavBar />
-      <h1>Principal</h1>
-
-      <div className="container-md">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">NOMBRE</th>
-              <th scope="col">CORREO</th>
-              <th scope="col">CEDULA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {User.map((user) => (
-              <tr key={user.idUsuario}>
-                <th scope="row">{user.idUsuario}</th>
-                <td>{user.Nombre}</td>
-                <td>{user.Correo}</td>
-                <td>{user.Cedula}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <NavBar />
+    <div className="App">
+      <Banner images={images} />
+      <div className="content">
+        <h2>Sobre Systrading</h2>
+        <p>Es un sistema de gestión de inventario que ofrece la ventaja de mantener organizado e 
+          identificado cada producto de venta, lo que puede ser traducido en ahorrar tiempo y recursos
+          útiles para mejorar la calidad de la organización y que apoya a la prevención de inconvenientes en 
+          la gestión de inventario.</p>
       </div>
+    </div>
     </>
   );
-};
+}
 
-export default Principal;
+export default App;

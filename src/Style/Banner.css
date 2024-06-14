@@ -1,0 +1,12 @@
+.banner {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .banner img {
+    width: 100%;
+    height: auto;
+  }
+  
