@@ -1,0 +1,20 @@
+
+
+  /* styles.css */
+
+.btn-bordered {
+    margin: 5px; /* Agrega un margen alrededor de los botones */
+    border: 2px solid #ccc; /* Agrega un borde de 2px de color gris claro */
+    padding: 10px 20px; /* Ajusta el relleno interno de los botones */
+    border-radius: 5px; /* Bordes redondeados */
+  }
+  
+  .btn-bordered.btn-danger {
+    border-color: #d9534f; /* Borde rojo para el botón de eliminar */
+  }
+  
+  .btn-bordered.btn-warning {
+    border-color: #f0ad4e; /* Borde naranja para el botón de modificar */
+  }
+  
+  

@@ -4,13 +4,15 @@ import axios from "axios";
 import Swal from 'sweetalert2'; // Importa Swal para mostrar mensajes de confirmación
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from "react-router-dom";
-
+import '../Style/VerProductos.css'; // Importa la hoja de estilos CSS
 
 const VerProductos = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+
   const handleUpdateClick = (idproduct) => {
-    navigate("/ActualizarProducto/"+idproduct);};
+    navigate("/ActualizarProducto/" + idproduct);
+  };
 
   useEffect(() => {
     getProducts();
@@ -70,10 +72,10 @@ const VerProductos = () => {
                 <img className="card-img-top" src={product.image} alt={product.name} />
                 <div className="card-body">
                   <h4 className="card-title">{product.name}</h4>
-                  <h5>${product.unit_price}</h5>
+                  <h5>${Number(product.unit_price).toLocaleString()}</h5>
                   <p className="card-text">Cantidad: {product.cantidad}</p>
-                  <button className="btn btn-danger" onClick={() => deleteProducto(product.idproduct)}>Eliminar</button>
-                  <button className="btn btn-warning" onClick={() => handleUpdateClick(product.idproduct)}>
+                  <button className="btn btn-danger btn-bordered" onClick={() => deleteProducto(product.idproduct)}>Eliminar</button>
+                  <button className="btn btn-warning btn-bordered" onClick={() => handleUpdateClick(product.idproduct)}>
                     Modificar
                   </button>
                 </div>
